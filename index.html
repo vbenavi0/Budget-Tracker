@@ -5,36 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Tracker</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 </head>
 <body>
     <main>
         <h1>Budget Tracker</h1>
-        <h3 id = "budgetTotal">Budget Total: $0</h3>
-        <form onsubmit="event.preventDefault(); budget1.addIncome()">
-            <label for="incomeNum">Add Income Amount: </label>
-            <input type="text" name="incomeNum" id="incomeNum"> <br>
-            <label for="incomeDesc">Add Income Description: </label>
-            <input type="text" name="incomeDesc" id="incomeDesc"> <br>
-            <input type="submit">
-        </form>
-        <form onsubmit="event.preventDefault(); budget1.addExpense()">
-            <label for="expenseNum">Add Expense Amount: </label>
-            <input type="text" name="expenseNum" id="expenseNum"> <br>
-            <label for="expenseDesc">Add Expense Description: </label>
-            <input type="text" name="expenseDesc" id="expenseDesc"> <br>
-            <input type="submit">
-        </form>
-        <section>
-            <h4>Incomes:</h4>
-            <ul id = 'incomeList'>
-
-            </ul>
-        </section>
-        <section>
-            <h4>Expenses:</h4>
-            <ul id = 'expenseList'>
-
-            </ul>
+        <h2 id = "budgetTotal">Budget Total: $0</h2>
+        <section id="incExp">
+            <section id = 'income'>
+                <h3 id = 'incTotal'>Income Total: $0</h3>
+                <form onsubmit="event.preventDefault(); budget1.addIncome()">
+                    <label for="incomeNum">Add Income Amount: </label>
+                    <input type="text" name="incomeNum" id="incomeNum" placeholder="0.00"> <br>
+                    <label for="incomeDesc">Add Income Description: </label>
+                    <input type="text" name="incomeDesc" id="incomeDesc" placeholder="Income"> <br>
+                    <input type="submit">
+                </form>
+                <ul id = 'incomeList'>
+    
+                </ul>
+            </section>    
+            <section id = 'expense'>
+                <h3 id = 'expTotal'>Expense Total: $0</h3>
+                <form onsubmit="event.preventDefault(); budget1.addExpense()">
+                    <label for="expenseNum">Add Expense Amount: </label>
+                    <input type="text" name="expenseNum" id="expenseNum" placeholder="0.00"> <br>
+                    <label for="expenseDesc">Add Expense Description: </label>
+                    <input type="text" name="expenseDesc" id="expenseDesc" placeholder="Expense"> <br>
+                    <input type="submit">
+                </form>
+                <ul id = 'expenseList'>
+    
+                </ul>
+            </section>
         </section>
     </main>
     <script src="script.js"></script>
