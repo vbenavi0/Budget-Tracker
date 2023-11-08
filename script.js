@@ -1,6 +1,8 @@
 var incomeArr = [];
 var expenseArr = [];
 var total = 0;
+var incTotal = 0;
+var expTotal = 0;
 
 
 class budget { //Budget Class
@@ -14,8 +16,10 @@ class budget { //Budget Class
         let listItem = document.createElement('li');
         listItem.textContent = thisIncome.incomeDesc + ": +$" + thisIncome.incomeNum;
         incomeList.appendChild(listItem);
+        document.getElementById('incomeNum').value = "";
+        document.getElementById('incomeDesc').value = "";
         console.log(incomeArr);
-        this.calcTotal();
+        this.calcTotals();
     }
     
     addExpense(){
@@ -27,19 +31,27 @@ class budget { //Budget Class
         let listItem = document.createElement('li');
         listItem.textContent = thisExpense.expenseDesc + ": -$" + thisExpense.expenseNum;
         expenseList.appendChild(listItem);
+        document.getElementById('expenseNum').value = "";
+        document.getElementById('expenseDesc').value = "";
         console.log(expenseArr);
-        this.calcTotal();
+        this.calcTotals();
     }
 
-    calcTotal(){ //Calculate and Display total Budget Amount 
+    calcTotals(){ //Calculate and Display total Budget Amount 
         total = 0;
+        incTotal = 0;
+        expTotal = 0;
         for(let i = 0; i<incomeArr.length; i++){
             total+=incomeArr[i].incomeNum;
+            incTotal+=incomeArr[i].incomeNum;
         }
         for(let i = 0; i<expenseArr.length; i++){
             total-=expenseArr[i].expenseNum;
+            expTotal+=expenseArr[i].expenseNum;
         }
         document.getElementById('budgetTotal').innerText = 'Budget Total: $'+total;
+        document.getElementById('incTotal').innerText = 'Income Total: $'+incTotal;
+        document.getElementById('expTotal').innerText = 'Expense Total: $'+expTotal;
     }
 }
 
