@@ -3,6 +3,8 @@ var expenseArr = [];
 var total = 0;
 var incTotal = 0;
 var expTotal = 0;
+var iCounter = 0;
+var eCounter = 0;
 
 
 class budget { //Budget Class
@@ -15,10 +17,14 @@ class budget { //Budget Class
             let incomeList = document.getElementById('incomeList')
             let listItem = document.createElement('li');
             listItem.textContent = thisIncome.incomeDesc + ": +$" + thisIncome.incomeNum;
-            incomeList.appendChild(listItem);
             document.getElementById('incomeNum').value = "";
             document.getElementById('incomeDesc').value = "";
             document.getElementById('incomeWarning').innerText = "";
+
+            listItem.setAttribute('id','inc'+iCounter);
+            incomeList.appendChild(listItem);
+            iCounter++;
+
             console.log(incomeArr);
             this.calcTotals();
         }
@@ -36,10 +42,14 @@ class budget { //Budget Class
             let expenseList = document.getElementById('expenseList')
             let listItem = document.createElement('li');
             listItem.textContent = thisExpense.expenseDesc + ": -$" + thisExpense.expenseNum;
-            expenseList.appendChild(listItem);
             document.getElementById('expenseNum').value = "";
             document.getElementById('expenseDesc').value = "";
             document.getElementById('expenseWarning').innerText = "";
+
+            listItem.setAttribute('id','exp'+eCounter);
+            expenseList.appendChild(listItem);
+            eCounter++;
+
             console.log(expenseArr);
             this.calcTotals();
         }
