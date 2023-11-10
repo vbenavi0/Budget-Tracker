@@ -12,7 +12,7 @@ class budget { //Budget Class
         let incomeNum = document.getElementById('incomeNum').value;
         let incomeDesc = document.getElementById('incomeDesc').value;
         if(incomeNum!=""&&incomeDesc!=""){
-            let thisIncome = new income(incomeDesc, parseFloat(incomeNum));
+            let thisIncome = new income(incomeDesc, parseFloat(incomeNum), 'inc'+iCounter, iCounter);
             incomeArr.push(thisIncome);
             let incomeList = document.getElementById('incomeList')
             let listItem = document.createElement('li');
@@ -21,8 +21,16 @@ class budget { //Budget Class
             document.getElementById('incomeDesc').value = "";
             document.getElementById('incomeWarning').innerText = "";
 
+            let delBut = document.createElement('button'); //Delete Button
+            delBut.onclick = function(){ 
+                thisIncome.del(); 
+            };
+            delBut.innerText = "X";
+            delBut.setAttribute('class','delBut');
+            listItem.append(delBut);
             listItem.setAttribute('id','inc'+iCounter);
             incomeList.appendChild(listItem);
+
             iCounter++;
 
             console.log(incomeArr);
@@ -37,7 +45,7 @@ class budget { //Budget Class
         let expenseNum = document.getElementById('expenseNum').value;
         let expenseDesc = document.getElementById('expenseDesc').value;
         if(expenseNum!=""&&expenseDesc!=""){
-            let thisExpense = new expense(expenseDesc, parseFloat(expenseNum));
+            let thisExpense = new expense(expenseDesc, parseFloat(expenseNum), 'exp'+eCounter, eCounter);
             expenseArr.push(thisExpense);
             let expenseList = document.getElementById('expenseList')
             let listItem = document.createElement('li');
@@ -46,8 +54,16 @@ class budget { //Budget Class
             document.getElementById('expenseDesc').value = "";
             document.getElementById('expenseWarning').innerText = "";
 
+            let delBut = document.createElement('button'); //Delete Button
+            delBut.onclick = function(){ 
+                thisExpense.del(); 
+            };
+            delBut.innerText = "X";
+            delBut.setAttribute('class','delBut');
+            listItem.append(delBut);
             listItem.setAttribute('id','exp'+eCounter);
             expenseList.appendChild(listItem);
+
             eCounter++;
 
             console.log(expenseArr);
@@ -70,6 +86,9 @@ class budget { //Budget Class
             total-=expenseArr[i].expenseNum;
             expTotal+=expenseArr[i].expenseNum;
         }
+        total.toFixed(2); //Round to 2
+        incTotal.toFixed(2);
+        expTotal.toFixed(2);
         document.getElementById('budgetTotal').innerText = 'Budget Total: $'+total;
         document.getElementById('incTotal').innerText = 'Income Total: $'+incTotal;
         document.getElementById('expTotal').innerText = 'Expense Total: $'+expTotal;
@@ -77,16 +96,43 @@ class budget { //Budget Class
 }
 
 class income { //Income Class
-    constructor (iDesc ,iNum){
+    constructor (iDesc ,iNum, iId, iIndex){
         this.incomeDesc = iDesc;
         this.incomeNum = iNum;
+        this.incomeId = iId;
+        this.incomeIndex = iIndex;
+    }
+
+    del(){ //Delete Function
+        // console.log("Deleting: "+this.incomeId+" at array index: "+this.incomeIndex)
+        let inc = document.getElementById(this.incomeId)
+        inc.remove();
+        incomeArr.splice(this, 1);
+        incTotal -= this.incomeNum;
+        total -= this.incomeNum;
+        document.getElementById('budgetTotal').innerText = 'Budget Total: $'+total;
+        document.getElementById('incTotal').innerText = 'Income Total: $'+incTotal;
+        console.log(incomeArr);
     }
 }
 
 class expense { //Expense Class
-    constructor (eDesc, eNum){
+    constructor (eDesc, eNum, eId, eIndex){
         this.expenseDesc = eDesc;
         this.expenseNum = eNum;
+        this.expenseId = eId;
+        this.expenseIndex = eIndex;
+    }
+
+    del(){ //Delete Function
+        let exp = document.getElementById(this.expenseId)
+        exp.remove();
+        expenseArr.splice(this, 1);
+        expTotal -= this.expenseNum;
+        total += this.expenseNum;
+        document.getElementById('budgetTotal').innerText = 'Budget Total: $'+total;
+        document.getElementById('expTotal').innerText = 'Expense Total: $'+expTotal;
+        console.log(expenseArr);
     }
 }
 
