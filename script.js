@@ -12,7 +12,7 @@ class budget { //Budget Class
         let incomeNum = document.getElementById('incomeNum').value;
         let incomeDesc = document.getElementById('incomeDesc').value;
         if(incomeNum!=""&&incomeDesc!=""){
-            let thisIncome = new income(incomeDesc, parseFloat(incomeNum), 'inc'+iCounter, iCounter);
+            let thisIncome = new income(incomeDesc, parseFloat(incomeNum), 'inc'+iCounter);
             incomeArr.push(thisIncome);
             let incomeList = document.getElementById('incomeList')
             let listItem = document.createElement('li');
@@ -35,6 +35,8 @@ class budget { //Budget Class
 
             console.log(incomeArr);
             this.calcTotals();
+
+            this.updateBar()
         }
         else{
             document.getElementById('incomeWarning').innerText = "Please Fill Out BOTH Amount and Description Boxes";
@@ -45,7 +47,7 @@ class budget { //Budget Class
         let expenseNum = document.getElementById('expenseNum').value;
         let expenseDesc = document.getElementById('expenseDesc').value;
         if(expenseNum!=""&&expenseDesc!=""){
-            let thisExpense = new expense(expenseDesc, parseFloat(expenseNum), 'exp'+eCounter, eCounter);
+            let thisExpense = new expense(expenseDesc, parseFloat(expenseNum), 'exp'+eCounter);
             expenseArr.push(thisExpense);
             let expenseList = document.getElementById('expenseList')
             let listItem = document.createElement('li');
@@ -68,6 +70,8 @@ class budget { //Budget Class
 
             console.log(expenseArr);
             this.calcTotals();
+
+            this.updateBar()
         }
         else{
             document.getElementById('expenseWarning').innerText = "Please Fill Out BOTH Amount and Description Boxes";
@@ -93,46 +97,74 @@ class budget { //Budget Class
         document.getElementById('incTotal').innerText = 'Income Total: $'+incTotal;
         document.getElementById('expTotal').innerText = 'Expense Total: $'+expTotal;
     }
+
+    updateBar(){ //Update Bar Graph
+        let expPercent = expTotal/incTotal;
+        console.log(expPercent);
+        if(isNaN(expPercent)){ //If no income or expense
+            document.getElementById("expBar").style.width = ('0%');
+            document.getElementById("expBar").style.borderRadius = ('50px');
+        }
+        else if(expPercent === Infinity){ //If only no income
+            document.getElementById("expBar").style.width = ('100%');
+            document.getElementById("expBar").style.borderRadius = ('50px');
+        }
+        else if(expPercent >= 1){ //If expense if greater than income
+            document.getElementById("expBar").style.width = ('100%');
+            document.getElementById("expBar").style.borderRadius = ('50px');
+        }
+        else{ 
+            document.getElementById("expBar").style.width = ((expPercent*100)+'%');
+            document.getElementById("expBar").style.borderTopLeftRadius = ('0px');
+            document.getElementById("expBar").style.borderBottomLeftRadius = ('0px');
+        }
+        document.getElementById('barNums').innerText = 'Income: $' + incTotal + ' / Expense: $'+expTotal;
+    }
 }
 
 class income { //Income Class
-    constructor (iDesc ,iNum, iId, iIndex){
+    constructor (iDesc ,iNum, iId){
         this.incomeDesc = iDesc;
         this.incomeNum = iNum;
         this.incomeId = iId;
-        this.incomeIndex = iIndex;
     }
 
     del(){ //Delete Function
-        // console.log("Deleting: "+this.incomeId+" at array index: "+this.incomeIndex)
         let inc = document.getElementById(this.incomeId)
         inc.remove();
-        incomeArr.splice(this, 1);
-        incTotal -= this.incomeNum;
-        total -= this.incomeNum;
-        document.getElementById('budgetTotal').innerText = 'Budget Total: $'+total;
-        document.getElementById('incTotal').innerText = 'Income Total: $'+incTotal;
+        for(let i = 0; i<incomeArr.length; i++){
+            if(incomeArr[i].incomeId === this.incomeId){
+                incomeArr.splice(i, 1);
+            }
+        }
         console.log(incomeArr);
+
+        budget1.calcTotals();
+
+        budget1.updateBar();
     }
 }
 
 class expense { //Expense Class
-    constructor (eDesc, eNum, eId, eIndex){
+    constructor (eDesc, eNum, eId){
         this.expenseDesc = eDesc;
         this.expenseNum = eNum;
         this.expenseId = eId;
-        this.expenseIndex = eIndex;
     }
 
     del(){ //Delete Function
         let exp = document.getElementById(this.expenseId)
         exp.remove();
-        expenseArr.splice(this, 1);
-        expTotal -= this.expenseNum;
-        total += this.expenseNum;
-        document.getElementById('budgetTotal').innerText = 'Budget Total: $'+total;
-        document.getElementById('expTotal').innerText = 'Expense Total: $'+expTotal;
+        for(let i = 0; i<expenseArr.length; i++){
+            if(expenseArr[i].expenseId === this.expenseId){
+                expenseArr.splice(i, 1);
+            }
+        }
         console.log(expenseArr);
+
+        budget1.calcTotals();
+        
+        budget1.updateBar();
     }
 }
 
