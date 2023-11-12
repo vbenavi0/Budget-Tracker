@@ -6,6 +6,10 @@ var expTotal = 0;
 var iCounter = 0;
 var eCounter = 0;
 
+let USDollar = new Intl.NumberFormat('en-US', { //USD Formatter
+    style: 'currency',
+    currency: 'USD',
+});
 
 class budget { //Budget Class
     addIncome(){
@@ -16,7 +20,7 @@ class budget { //Budget Class
             incomeArr.push(thisIncome);
             let incomeList = document.getElementById('incomeList')
             let listItem = document.createElement('li');
-            listItem.textContent = thisIncome.incomeDesc + ": +$" + thisIncome.incomeNum;
+            listItem.textContent = thisIncome.incomeDesc + ": +" + USDollar.format(thisIncome.incomeNum);
             document.getElementById('incomeNum').value = "";
             document.getElementById('incomeDesc').value = "";
             document.getElementById('incomeWarning').innerText = "";
@@ -51,7 +55,7 @@ class budget { //Budget Class
             expenseArr.push(thisExpense);
             let expenseList = document.getElementById('expenseList')
             let listItem = document.createElement('li');
-            listItem.textContent = thisExpense.expenseDesc + ": -$" + thisExpense.expenseNum;
+            listItem.textContent = thisExpense.expenseDesc + ": -" + USDollar.format(thisExpense.expenseNum);
             document.getElementById('expenseNum').value = "";
             document.getElementById('expenseDesc').value = "";
             document.getElementById('expenseWarning').innerText = "";
@@ -93,9 +97,9 @@ class budget { //Budget Class
         total.toFixed(2); //Round to 2
         incTotal.toFixed(2);
         expTotal.toFixed(2);
-        document.getElementById('budgetTotal').innerText = 'Budget Total: $'+total;
-        document.getElementById('incTotal').innerText = 'Income Total: $'+incTotal;
-        document.getElementById('expTotal').innerText = 'Expense Total: $'+expTotal;
+        document.getElementById('budgetTotal').innerText = 'Budget Total: ' + USDollar.format(total);
+        document.getElementById('incTotal').innerText = 'Income Total: ' + USDollar.format(incTotal);
+        document.getElementById('expTotal').innerText = 'Expense Total: ' + USDollar.format(expTotal);
     }
 
     updateBar(){ //Update Bar Graph
@@ -118,7 +122,7 @@ class budget { //Budget Class
             document.getElementById("expBar").style.borderTopLeftRadius = ('0px');
             document.getElementById("expBar").style.borderBottomLeftRadius = ('0px');
         }
-        document.getElementById('barNums').innerText = 'Income: $' + incTotal + ' / Expense: $'+expTotal;
+        document.getElementById('barNums').innerText = 'Income: ' + USDollar.format(incTotal) + ' / Expense: ' + USDollar.format(expTotal);
     }
 }
 
