@@ -1,14 +1,16 @@
 html {
   font-family: "Kanit", sans-serif;
-  background-color: #242424;
   color: whitesmoke;
+  height: 100%;
+  background: linear-gradient(#00a8ab, rgb(0, 59, 119));
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 body {
-  height: 100vh;
   text-align: center;
   margin: 0px;
-  background: linear-gradient(#00a8ab, rgb(0, 59, 119));
 }
 
 h1 {
