@@ -1,6 +1,6 @@
-$prime-color: #00a8ab;
-$inc-color: rgb(0, 120, 0);
-$exp-color: rgb(120, 0, 0);
+$primary-color: #00a8ab;
+$inc-color: rgb(0, 125, 75);
+$exp-color: rgb(125, 0, 75);
 
 html{
     font-family: 'Kanit', sans-serif;
@@ -13,11 +13,11 @@ body{
     height: 100vh;
     text-align: center;
     margin: 0px;
-    background: linear-gradient($prime-color, rgb(0, 59, 119)); 
+    background: linear-gradient($primary-color, rgb(0, 59, 119)); 
 }
 
 h1{
-    // background-color: $prime-color;
+    background-color: $primary-color;
     margin: 0px;
     padding: 10px;
 }
