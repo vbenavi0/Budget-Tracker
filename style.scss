@@ -1,7 +1,7 @@
-$primary-color: #00a8ab;
-$secondary-color: rgb(0, 60, 120);
-$inc-color: rgb(0, 125, 75);
-$exp-color: rgb(125, 0, 75);
+$primary-color: #303030;
+$secondary-color: rgb(100, 100, 100);
+$inc-color: rgb(0, 125, 0);
+$exp-color: rgb(125, 0, 0);
 
 @mixin gradient($color1, $color2){
     background: linear-gradient($color1, $color2); 
@@ -73,23 +73,25 @@ li{
 
 #incExp{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 #income{
-    width: 40%;
+    width: 50%;
     background-color: $inc-color;
     margin: auto;
     margin-top: 0;
     border-radius: 10px;
+    margin-bottom: 25px;
 }
 
 #expense{
-    width: 40%;
+    width: 50%;
     background-color: $exp-color;
     margin: auto;
     margin-top: 0;
     border-radius: 10px;
+    margin-bottom: 25px;
 }
 
 .warning{

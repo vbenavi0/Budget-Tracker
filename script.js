@@ -126,8 +126,9 @@ class budget { //Budget Class
     }
 }
 
-class income { //Income Class
+class income extends budget{ //Income Class
     constructor (iDesc ,iNum, iId){
+        super();
         this.incomeDesc = iDesc;
         this.incomeNum = iNum;
         this.incomeId = iId;
@@ -143,14 +144,15 @@ class income { //Income Class
         }
         console.log(incomeArr);
 
-        budget1.calcTotals();
+        this.calcTotals();
 
-        budget1.updateBar();
+        this.updateBar();
     }
 }
 
-class expense { //Expense Class
+class expense extends budget{ //Expense Class
     constructor (eDesc, eNum, eId){
+        super();
         this.expenseDesc = eDesc;
         this.expenseNum = eNum;
         this.expenseId = eId;
@@ -166,9 +168,9 @@ class expense { //Expense Class
         }
         console.log(expenseArr);
 
-        budget1.calcTotals();
+        this.calcTotals();
         
-        budget1.updateBar();
+        this.updateBar();
     }
 }
 
